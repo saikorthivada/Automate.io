@@ -1,0 +1,16 @@
+.content-body {
+    background-color: #8080800a;
+    height: 80vh;
+    padding: 20px;
+    width: 80vw;
+}
+
+textarea {
+    border: none;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+textarea:focus {
+    outline-color: white
+}

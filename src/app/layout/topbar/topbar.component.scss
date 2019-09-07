@@ -1,0 +1,36 @@
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 4;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    // color: ;
+}
+
+.labels {
+    font-size: 14px;
+    font-weight: 500;
+    color: #635d5ded;
+}
+
+li.nav-item:hover {
+    color: #1a1a96bf;
+    cursor: pointer;
+}
+
+.navbanavbar-collapse {
+    background-color: #f8f9fa!important;
+}
+
+.labels:hover {
+    color: #1a1a96bf;
+    cursor: pointer;
+}

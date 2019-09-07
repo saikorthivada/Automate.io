@@ -1,0 +1,3 @@
+<app-topbar (removeCurrentNotes)="removeCurrentNotes($event)" (addNotes)="addNotes($event)"></app-topbar>
+<app-sidebar [notesList]="notesList" (selectedNotes)="selectedNotesFromSideNav($event)"></app-sidebar>
+<app-main [selectedNotes]="selectedNotes" (updateDescription)="updateNotes($event)"></app-main>

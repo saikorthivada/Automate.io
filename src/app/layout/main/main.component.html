@@ -1,0 +1,7 @@
+<div id="main">
+    <form *ngIf="notes">
+        <textarea class="content-body" (keyup)="updateDescriptionAction()" [(ngModel)]="notes.description"
+            [ngModelOptions]="{standalone: true}">
+        </textarea>
+    </form>
+</div>

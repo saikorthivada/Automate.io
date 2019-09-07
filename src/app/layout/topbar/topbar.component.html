@@ -1,0 +1,46 @@
+<div class="sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-t-0 p-b-0 h-80">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item m-r-10" (click)="addNotesAction()">
+                    <span class="fa fa-plus-square-o m-r-5" aria-hidden="true"></span>
+                    <span class="labels">Add Notes</span>
+                </li>
+                <li class="nav-item m-r-10" (click)="removeCurrentNotesAction()">
+                    <span class="fa fa-trash m-r-5" aria-hidden="true"></span>
+                    <span class="labels">Remove Notes</span>
+                </li>
+                <!-- <li class="nav-item m-r-10">
+                    <span class="fa fa-pencil-square-o m-r-5" aria-hidden="true"></span>
+                    <span class="labels">Edit Notes</span>
+                </li> -->
+            </ul>
+            <span class="navbar-text">
+                <ng-container *ngTemplateOutlet="search"></ng-container>
+            </span>
+        </div>
+    </nav>
+</div>
+
+<!-- Search Template  -->
+
+<ng-template #search>
+    <form class="m-t-10">
+        <div class="form-group has-search">
+            <span class="fa fa-search form-control-feedback"></span>
+            <form class="input-group">
+                <input type="text" class="form-control" placeholder="Search for your course" name="search"
+                    (keyup.enter)="search()" [(ngModel)]="searchValue">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" (click)="search()">
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </form>
+</ng-template>

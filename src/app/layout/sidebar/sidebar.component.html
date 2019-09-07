@@ -1,0 +1,16 @@
+<div id="mySidenav" class="sidenav">
+    <a class="closebtn" (click)="closeNav()">&times;</a>
+    <p *ngIf="notesList.length <= 0" class="error">No Records Found</p>
+    <ng-container *ngFor="let notes of notesList; let i = index">
+        <div class="card m-t-10 pointer" [ngClass]="i === selectedIndex ? 'active-notes' : ''" style="width: 80%;"
+            (click)="notesSelectionChange(i, notes)">
+            <div class="card-body">
+                <p class="card-title">{{notes.title}}</p>
+                <p class="notes-description m-b-0">{{notes.description}}</p>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<!-- Use any element to open the sidenav -->
+<button class="btn btn-primary m-l-10" (click)="openNav()">Open Notes</button>
