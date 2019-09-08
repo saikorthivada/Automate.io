@@ -14,7 +14,8 @@ export class SidebarComponent implements OnInit {
   selectedNotes: EventEmitter<any> = new EventEmitter();
   @Output()
   updatedNotes: EventEmitter<any> = new EventEmitter();
-  selectedIndex = 0;
+  @Input()
+  selectedNote: any;
   isSideNavOpen = false;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -56,7 +57,7 @@ export class SidebarComponent implements OnInit {
 
   // when user clicks on each notes
   notesSelectionChange(index, notes) {
-    this.selectedIndex = index;
+    this.selectedNote = notes;
     this.selectedNotes.emit(notes);
   }
 

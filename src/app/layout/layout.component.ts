@@ -48,8 +48,10 @@ export class LayoutComponent implements OnInit {
       if (this.notesList.length <= 0) {
         this.notesList = [];
         this.selectedNotes = {};
-      } else {
+      } else if (currentSelectedNotesIndex < this.notesList.length - 1) {
         this.selectedNotes = this.notesList[currentSelectedNotesIndex];
+      } else {
+        this.selectedNotes = this.notesList[this.notesList.length - 1];
       }
       this.storageService.setLocalStorageItem(LOCAL_STORAGE.NOTES_LIST, this.notesList);
     } else {
