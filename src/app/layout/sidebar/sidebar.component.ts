@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateNotesComponent } from '../../shared/components/create-notes/create-notes.component';
 
@@ -15,10 +15,23 @@ export class SidebarComponent implements OnInit {
   @Output()
   updatedNotes: EventEmitter<any> = new EventEmitter();
   selectedIndex = 0;
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    const width = event.target.innerWidth;
+    this.resizeWindow(width);
+  }
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
     this.openNav();
+  }
+
+  resizeWindow(width) {
+    if (width < 768) {
+      this.closeNav();
+    } else {
+      this.openNav();
+    }
   }
   openNav() {
     document.getElementById('mySidenav').style.width = '250px';

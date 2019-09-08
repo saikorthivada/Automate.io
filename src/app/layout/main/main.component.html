@@ -1,5 +1,10 @@
 <div id="main">
     <form *ngIf="notes">
+        <div class="d-flex justify-content-between">
+            <p class="m-b-0 title">{{notes.title}}</p>
+            <p class="m-b-0 m-r-20 date">{{notes.date | date: 'dd-MMM-yyyy (hh:ss:mm)'}}</p>
+        </div>
+       
         <textarea class="content-body" (keyup)="updateDescriptionAction()" [(ngModel)]="notes.description"
             [ngModelOptions]="{standalone: true}">
         </textarea>

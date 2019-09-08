@@ -1,25 +1,42 @@
 <div class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-t-0 p-b-0 h-80">
-        <div class="d-flex justify-content-between align-data">
-            <div id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item m-r-10" (click)="addNotesAction()">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light p-t-0 p-b-0 h-80">
+        <div class="row align-data">
+            <div id="navbarText col-sm-12 col-xs-12 col-md-6">
+                <ul class="row navbar-nav mr-auto ">
+                    <li class="nav-item m-r-10 col-xs-6 col-sm-6" (click)="addNotesAction()">
                         <span class="fa fa-plus-square-o m-r-5" aria-hidden="true"></span>
                         <span class="labels">Add Notes</span>
                     </li>
-                    <li class="nav-item m-r-10" (click)="removeCurrentNotesAction()">
+                    <li class="nav-item m-r-10 col-xs-6 col-sm-6" (click)="removeCurrentNotesAction()">
                         <span class="fa fa-trash m-r-5" aria-hidden="true"></span>
                         <span class="labels">Remove Notes</span>
                     </li>
                 </ul>
             </div>
-            <div>
+            <div class="col-sm-12 col-xs-12 col-md-6">
                 <ng-container *ngTemplateOutlet="search"></ng-container>
             </div>
         </div>
 
-    </nav>
+    </nav> -->
 
+    <div class="row align-data m-l-10 m-r-20">
+        <div class="col-md-6 col-xs-12 col-sm-12">
+            <div class="row">
+                <div class="m-r-20" (click)="addNotesAction()">
+                    <span class="fa fa-plus-square-o m-r-5" aria-hidden="true"></span>
+                    <span class="labels">Add Notes</span>
+                </div>
+                <div (click)="removeCurrentNotesAction()">
+                    <span class="fa fa-trash m-r-5" aria-hidden="true"></span>
+                    <span class="labels">Remove Notes</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12 col-sm-12 float-right">
+            <ng-container *ngTemplateOutlet="search"></ng-container>
+        </div>
+    </div>
 </div>
 
 <!-- Search Template  -->
