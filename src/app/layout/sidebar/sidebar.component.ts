@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   @Output()
   updatedNotes: EventEmitter<any> = new EventEmitter();
   selectedIndex = 0;
+  isSideNavOpen = false;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     const width = event.target.innerWidth;
@@ -33,12 +34,22 @@ export class SidebarComponent implements OnInit {
       this.openNav();
     }
   }
+
+  changeNav() {
+    if (this.isSideNavOpen) {
+      this.closeNav();
+    } else {
+      this.openNav();
+    }
+  }
   openNav() {
+    this.isSideNavOpen = true;
     document.getElementById('mySidenav').style.width = '250px';
     document.getElementById('main').style.marginLeft = '250px';
   }
 
   closeNav() {
+    this.isSideNavOpen = false;
     document.getElementById('mySidenav').style.width = '0';
     document.getElementById('main').style.marginLeft = '0';
   }

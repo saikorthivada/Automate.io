@@ -4,11 +4,10 @@
     width: 0;
     position: fixed;
     z-index: 1; 
-    top: 80px;
+    top: 100px;
     left: 0;
     background-color: white; 
     overflow-x: hidden; 
-    padding-top: 60px;
     transition: 0.3s;
   }
 
@@ -38,23 +37,11 @@
     white-space: nowrap;
     width: 170px;
   }  
-  .closebtn:hover {
-    color: #68121a;
-  }
   .active-notes {
     background: #8080802b;
     color: #373434;
     font-weight: bold;
   }
-  .sidenav .closebtn {
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 30px;
-    margin-left: 50px;
-    cursor: pointer;
-  }
-
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {

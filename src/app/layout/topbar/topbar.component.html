@@ -6,7 +6,7 @@
                     <span class="fa fa-plus-square-o m-r-5" aria-hidden="true"></span>
                     <span class="labels">Add Notes</span>
                 </div>
-                <div (click)="removeCurrentNotesAction()">
+                <div (click)="removeCurrentNotesAction()" [ngClass]="notesList.length <= 0 ? 'no-records' : ''">
                     <span class="fa fa-trash m-r-5" aria-hidden="true"></span>
                     <span class="labels">Remove Notes</span>
                 </div>
@@ -25,10 +25,10 @@
         <div class="form-group has-search">
             <span class="fa fa-search form-control-feedback"></span>
             <form class="input-group">
-                <input type="text" class="form-control" placeholder="Search with title and note data" name="search"
-                    (keyup)="searchData()" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}">
+                <input [readonly]="notesList.length <= 0" type="text" class="form-control" placeholder="Search with title and note data"
+                    name="search" (keyup)="searchData()" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" (click)="searchData()">
+                    <button [disabled]="notesList.length <= 0" class="btn btn-primary" type="button" (click)="searchData()">
                         Search
                     </button>
                 </div>

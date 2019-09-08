@@ -41,7 +41,7 @@ export class LayoutComponent implements OnInit {
   }
 
   // WHEN USER CLICKS ON REMOVE NOTES
-  removeCurrentNotes() {
+  removeCurrentNotes(ev) {
     const currentSelectedNotesIndex = this.notesList.findIndex(obj => obj.id === this.selectedNotes.id);
     if (currentSelectedNotesIndex !== -1) {
       this.notesList.splice(currentSelectedNotesIndex, 1);

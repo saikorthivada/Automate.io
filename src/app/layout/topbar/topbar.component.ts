@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateNotesComponent } from '../../shared/components/create-notes/create-notes.component';
 import { PopupService } from '../../shared/services/popup/popup.service';
@@ -17,28 +17,29 @@ export class TopbarComponent implements OnInit {
   addNotes: EventEmitter<any> = new EventEmitter();
   @Output()
   searchAction: EventEmitter<any> = new EventEmitter();
+  @Input()
+  notesList: any = [];
   searchValue = '';
   constructor(private modalService: NgbModal, private popupService: PopupService) { }
 
   ngOnInit() {
   }
   removeCurrentNotesAction() {
-    const data: IDataInfo = {
-      cancelButtonLabel: 'Cancel',
-      dialog_type: DIALOG_TYPE.CONFIMATION_DIALOG,
-      okButtonLabel: 'OK',
-      message: 'Do you want to delete Current Note',
-      title: 'Delete Confirmation'
-    };
-    const modelRef = this.popupService.openModal(data, 'static', false, 'sm', true);
-    modelRef.then(res => {
-      console.log(res);
-      if (res === 'submit') {
-        this.removeCurrentNotes.emit(true);
-      }
-    });
-
-    // this.removeCurrentNotes.emit(true);
+    if (this.notesList.length > 0) {
+      const data: IDataInfo = {
+        cancelButtonLabel: 'Cancel',
+        dialog_type: DIALOG_TYPE.CONFIMATION_DIALOG,
+        okButtonLabel: 'OK',
+        message: 'Do you want to delete Current Note',
+        title: 'Delete Confirmation'
+      };
+      const modelRef = this.popupService.openModal(data, 'static', false, 'sm', true);
+      modelRef.then(res => {
+        if (res === 'submit') {
+          this.removeCurrentNotes.emit(true);
+        }
+      });
+    }
   }
 
   // adding new notes
