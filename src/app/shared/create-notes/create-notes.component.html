@@ -1,11 +1,10 @@
 <div class="modal-header">
-    <h6 class="modal-title">Notes Title</h6>
+    <h6 class="modal-title">{{isEditMode ? 'Edit Notes' : 'Create Notes'}}</h6>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <!-- <ng-container *ngTemplateOutlet="notesCreationForm"></ng-container> -->
     <form [formGroup]="notesForm">
         <div class="form-group">
             <input type="text" class="form-control" id="notesTitle" placeholder="Notes Title" formControlName="title">
@@ -17,6 +16,7 @@
 </div>
 <div class="modal-footer">
     <div class="float-right">
-        <button class="btn btn-primary" [disabled]="notesForm.invalid" (click)="createNewNotes()">Create Notes</button>
+        <button class="btn btn-primary" [disabled]="notesForm.invalid" (click)="createOrEditNewNotes()">{{isEditMode ?
+            'Update Title' : 'Create Notes'}}</button>
     </div>
 </div>

@@ -3,7 +3,7 @@
     <p *ngIf="notesList.length <= 0" class="error">No Records Found</p>
     <ng-container *ngFor="let notes of notesList; let i = index">
         <div class="card m-t-10 pointer" [ngClass]="i === selectedIndex ? 'active-notes' : ''" style="width: 80%;"
-            (click)="notesSelectionChange(i, notes)">
+            (click)="notesSelectionChange(i, notes)" (dblclick)="editNoteTitle(notes)">
             <div class="card-body">
                 <p class="card-title">{{notes.title}}</p>
                 <p class="notes-description m-b-0">{{notes.description}}</p>

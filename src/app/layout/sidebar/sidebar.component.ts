@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateNotesComponent } from '../../shared/create-notes/create-notes.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,8 +12,10 @@ export class SidebarComponent implements OnInit {
   notesList: any = [];
   @Output()
   selectedNotes: EventEmitter<any> = new EventEmitter();
+  @Output()
+  updatedNotes: EventEmitter<any> = new EventEmitter();
   selectedIndex = 0;
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
     this.openNav();
@@ -31,5 +35,19 @@ export class SidebarComponent implements OnInit {
   notesSelectionChange(index, notes) {
     this.selectedIndex = index;
     this.selectedNotes.emit(notes);
+  }
+
+  // edit note title
+  editNoteTitle(note) {
+    console.log(note);
+    const modalRef = this.modalService.open(CreateNotesComponent, {
+      centered: true,
+    });
+    modalRef.componentInstance.data = note;
+    modalRef.componentInstance.isEditMode = true;
+    modalRef.result.then(res => {
+      console.log(res);
+      this.updatedNotes.emit(res);
+    });
   }
 }

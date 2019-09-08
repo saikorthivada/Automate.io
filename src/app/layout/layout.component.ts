@@ -32,7 +32,6 @@ export class LayoutComponent implements OnInit {
   }
 
   selectedNotesFromSideNav(selectedObj) {
-    console.log(selectedObj);
     this.selectedNotes = selectedObj;
   }
 
@@ -45,6 +44,7 @@ export class LayoutComponent implements OnInit {
     }
   }
 
+  // add notes
   addNotes(event) {
     if (event !== 'Cross click') {
       const obj = new Note();
