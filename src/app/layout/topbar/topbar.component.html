@@ -25,10 +25,10 @@
         <div class="form-group has-search">
             <span class="fa fa-search form-control-feedback"></span>
             <form class="input-group">
-                <input [readonly]="notesList.length <= 0" type="text" class="form-control" placeholder="Search with title and note data"
-                    name="search" (keyup)="searchData()" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}">
+                <input type="text" class="form-control" placeholder="Search with title and note data" name="search"
+                    (keyup)="searchData()" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}">
                 <div class="input-group-append">
-                    <button [disabled]="notesList.length <= 0" class="btn btn-primary" type="button" (click)="searchData()">
+                    <button class="btn btn-primary" type="button" (click)="searchData()">
                         Search
                     </button>
                 </div>
