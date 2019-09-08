@@ -17,9 +17,12 @@ export class MainComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    console.log(this.selectedNotes);
     if (this.selectedNotes) {
       this.notes = JSON.parse(JSON.stringify(this.selectedNotes));
       this.changeDetector.detectChanges();
+    } else {
+      this.selectedNotes = {};
     }
   }
   updateDescriptionAction() {

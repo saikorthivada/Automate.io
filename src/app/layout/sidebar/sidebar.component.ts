@@ -20,7 +20,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.openNav();
   }
-
   openNav() {
     document.getElementById('mySidenav').style.width = '250px';
     document.getElementById('main').style.marginLeft = '250px';
@@ -39,14 +38,17 @@ export class SidebarComponent implements OnInit {
 
   // edit note title
   editNoteTitle(note) {
-    console.log(note);
+    if (note && note.description === undefined) {
+      note.description = '';
+    }
     const modalRef = this.modalService.open(CreateNotesComponent, {
       centered: true,
+      keyboard: false,
+      backdrop: 'static'
     });
     modalRef.componentInstance.data = note;
     modalRef.componentInstance.isEditMode = true;
     modalRef.result.then(res => {
-      console.log(res);
       this.updatedNotes.emit(res);
     });
   }

@@ -23,7 +23,9 @@ export class TopbarComponent implements OnInit {
   // adding new notes
   addNotesAction() {
     const modalRef = this.modalService.open(CreateNotesComponent, {
-      centered: true
+      centered: true,
+      keyboard: false,
+      backdrop: 'static'
     });
     modalRef.result.then(res => {
       this.addNotes.emit(res);

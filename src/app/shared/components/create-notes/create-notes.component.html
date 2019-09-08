@@ -7,9 +7,13 @@
 <div class="modal-body">
     <form [formGroup]="notesForm">
         <div class="form-group">
-            <input type="text" class="form-control" id="notesTitle" placeholder="Notes Title" formControlName="title">
+            <input type="text" class="form-control" id="notesTitle" placeholder="Notes Title" formControlName="title" (keyup)="duplicateErrorMessage = false">
             <p class="error p-l-5" *ngIf="notesForm.get('title').invalid && (notesForm.get('title').touched || notesForm.get('title').dirty) ">
                 Please Enter Notes
+            </p>
+
+            <p class="error p-l-5" *ngIf="duplicateErrorMessage">
+                Notes title already exist please choose any other name
             </p>
         </div>
     </form>

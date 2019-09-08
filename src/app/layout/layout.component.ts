@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { StorageService } from '../shared/services/storage.service';
+import { LOCAL_STORAGE } from '../shared/enums/local-storage.enum';
 
 
 class Note {
   id: string;
   title: string;
   description: string;
+  date: Date;
   constructor() {
     this.id = '';
     this.title = '';
     this.description = '';
+    this.date = new Date();
   }
 }
 @Component({
@@ -20,27 +24,37 @@ export class LayoutComponent implements OnInit {
   notesList: Note[] = [];
 
   selectedNotes: any;
-  constructor() {
+  constructor(private storageService: StorageService, private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     if (localStorage.getItem('notesList')) {
-      this.notesList = JSON.parse(localStorage.getItem('notesList'));
-
+      this.notesList = this.storageService.getLocalStorageItem(LOCAL_STORAGE.NOTES_LIST);
     }
     this.selectedNotes = this.notesList[0];
   }
 
+  // ON CLICKING ON THE SIDENAV NOTES
   selectedNotesFromSideNav(selectedObj) {
     this.selectedNotes = selectedObj;
   }
 
+  // WHEN USER CLICKS ON REMOVE NOTES
   removeCurrentNotes() {
     const currentSelectedNotesIndex = this.notesList.findIndex(obj => obj.id === this.selectedNotes.id);
     if (currentSelectedNotesIndex !== -1) {
-      this.selectedNotes = this.notesList[currentSelectedNotesIndex + 1];
       this.notesList.splice(currentSelectedNotesIndex, 1);
-      localStorage.setItem('notesList', JSON.stringify(this.notesList));
+      if (this.notesList.length <= 0) {
+        this.notesList = [];
+        this.selectedNotes = {};
+      } else {
+        this.selectedNotes = this.notesList[currentSelectedNotesIndex];
+      }
+      this.storageService.setLocalStorageItem(LOCAL_STORAGE.NOTES_LIST, this.notesList);
+      // localStorage.setItem('notesList', JSON.stringify(this.notesList));
+    } else {
+      this.selectedNotes = {};
+      this.notesList = [];
     }
   }
 
@@ -50,18 +64,23 @@ export class LayoutComponent implements OnInit {
       const obj = new Note();
       obj.title = event.title;
       obj.description = '';
-      obj.id = (new Date().toISOString()).toString();
+      obj.id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
       this.notesList.unshift(obj);
       this.selectedNotes = obj;
-      localStorage.setItem('notesList', JSON.stringify(this.notesList));
+      this.storageService.setLocalStorageItem(LOCAL_STORAGE.NOTES_LIST, this.notesList);
+      // localStorage.setItem('notesList', JSON.stringify(this.notesList));
     }
   }
 
   updateNotes(updateEvent) {
     const index = this.notesList.findIndex(obj => obj.id === updateEvent.id);
     if (index !== -1) {
+      updateEvent.date = new Date();
       this.notesList[index] = updateEvent;
-      localStorage.setItem('notesList', JSON.stringify(this.notesList));
+      this.selectedNotes = this.notesList[index];
+      this.storageService.setLocalStorageItem(LOCAL_STORAGE.NOTES_LIST, this.notesList);
+      this.notesList = this.storageService.getLocalStorageItem(LOCAL_STORAGE.NOTES_LIST);
+      // localStorage.setItem('notesList', JSON.stringify(this.notesList));
     }
   }
 }
