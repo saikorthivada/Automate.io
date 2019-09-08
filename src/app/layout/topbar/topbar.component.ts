@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreateNotesComponent } from '../../shared/create-notes/create-notes.component';
+import { CreateNotesComponent } from '../../shared/components/create-notes/create-notes.component';
 
 @Component({
   selector: 'app-topbar',
