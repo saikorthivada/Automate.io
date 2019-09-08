@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { StorageService } from '../shared/services/storage.service';
 import { LOCAL_STORAGE } from '../shared/enums/local-storage.enum';
+import { CustomSearchService } from '../shared/services/customSearch/custom-search.service';
 
 
 class Note {
@@ -24,7 +25,7 @@ export class LayoutComponent implements OnInit {
   notesList: Note[] = [];
 
   selectedNotes: any;
-  constructor(private storageService: StorageService, private changeDetector: ChangeDetectorRef) {
+  constructor(private storageService: StorageService, private changeDetector: ChangeDetectorRef, private searchService: CustomSearchService) {
   }
 
   ngOnInit() {
@@ -51,7 +52,6 @@ export class LayoutComponent implements OnInit {
         this.selectedNotes = this.notesList[currentSelectedNotesIndex];
       }
       this.storageService.setLocalStorageItem(LOCAL_STORAGE.NOTES_LIST, this.notesList);
-      // localStorage.setItem('notesList', JSON.stringify(this.notesList));
     } else {
       this.selectedNotes = {};
       this.notesList = [];
@@ -68,7 +68,6 @@ export class LayoutComponent implements OnInit {
       this.notesList.unshift(obj);
       this.selectedNotes = obj;
       this.storageService.setLocalStorageItem(LOCAL_STORAGE.NOTES_LIST, this.notesList);
-      // localStorage.setItem('notesList', JSON.stringify(this.notesList));
     }
   }
 
@@ -80,7 +79,16 @@ export class LayoutComponent implements OnInit {
       this.selectedNotes = this.notesList[index];
       this.storageService.setLocalStorageItem(LOCAL_STORAGE.NOTES_LIST, this.notesList);
       this.notesList = this.storageService.getLocalStorageItem(LOCAL_STORAGE.NOTES_LIST);
-      // localStorage.setItem('notesList', JSON.stringify(this.notesList));
+    }
+  }
+
+  search(event) {
+    this.notesList = this.searchService.searchFilterArrayOfJson(this.storageService.getLocalStorageItem(LOCAL_STORAGE.NOTES_LIST), event, ['title', 'description'], 'id');
+    if (this.notesList.length <= 0) {
+      this.notesList = [];
+      this.selectedNotes = {};
+    } else {
+      this.selectedNotes = this.notesList[0];
     }
   }
 }

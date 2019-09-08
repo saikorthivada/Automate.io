@@ -12,6 +12,9 @@ export class TopbarComponent implements OnInit {
   removeCurrentNotes: EventEmitter<any> = new EventEmitter();
   @Output()
   addNotes: EventEmitter<any> = new EventEmitter();
+  @Output()
+  searchAction: EventEmitter<any> = new EventEmitter();
+  searchValue = '';
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -30,5 +33,10 @@ export class TopbarComponent implements OnInit {
     modalRef.result.then(res => {
       this.addNotes.emit(res);
     });
+  }
+
+  // search emitter
+  searchData() {
+    this.searchAction.emit(this.searchValue);
   }
 }
